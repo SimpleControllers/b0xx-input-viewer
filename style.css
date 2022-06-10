@@ -1,0 +1,32 @@
+body {
+  background-color: black;
+  overflow-x: hidden;
+}
+
+img {
+  width: 100%;
+  height: auto;
+
+  position: absolute;
+  top:0;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.button {
+  background-color: aqua;
+  border: none;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  top:0;
+  left:0;
+  position: absolute;
+}
+
+.button:hover {
+  background-color: #0099cc;
+}
