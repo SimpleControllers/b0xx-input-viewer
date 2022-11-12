@@ -14,7 +14,7 @@ const { ReadlineParser } = require('@serialport/parser-readline')
 
 function serialCon(){
   SerialPort.list().then(ports => {
-    var port = ports.find(port => (/2341/.test(port.vendorId) && /8036/.test(port.productId)) || (/2E8A/.test(port.vendorId) && /102F/.test(port.productId)))
+    var port = ports.find(port => (/2341/.test(port.vendorId) && /8036/.test(port.productId)) || (/2E8A/.test(port.vendorId) && /102F/.test(port.productId)) || (/045E/.test(port.vendorId) && /02A1/.test(port.productId)))
 
     if (!port) {
       console.log("B0XX Not Found")
