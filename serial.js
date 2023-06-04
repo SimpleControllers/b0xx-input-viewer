@@ -11,10 +11,34 @@ const { ReadlineParser } = require('@serialport/parser-readline')
 //const Readline = SerialPort.parsers.Readline;
 //const { dialog } = require('electron')
 
+/**
+ * List of valid B0XX ports.
+ */
+const validPorts = [
+  { vendorId: "2341", productId: "8036" },
+  { vendorId: "2E8A", productId: "102F" },
+  { vendorId: "045E", productId: "02A1" }
+];
+
+/**
+ * Finds a valid port amongst the list of given ports.
+ */
+function findValidPort(ports) {
+  for (const port of ports) {
+    const vendorId = port.vendorId.toLowerCase();
+    const productId = port.productId.toLowerCase();
+    for (const validPort of validPorts) {
+      // Case-insensitive check
+      if (validPort.vendorId.toLowerCase() === vendorId && validPort.productId.toLowerCase() === productId) {
+        return port;
+      }
+    }
+  }
+}
 
 function serialCon(){
   SerialPort.list().then(ports => {
-    var port = ports.find(port => (/2341/.test(port.vendorId) && /8036/.test(port.productId)) || (/2E8A/.test(port.vendorId) && /102F/.test(port.productId)) || (/045E/.test(port.vendorId) && /02A1/.test(port.productId)))
+    const port = findValidPort(ports);
 
     if (!port) {
       console.log("B0XX Not Found")
@@ -27,11 +51,11 @@ function serialCon(){
       console.log("B0XX Found")
       console.log(port)
       console.log(port.vendorId)
+      const comport = port.path;
       console.log(comport)
-      var comport = port.path;
 
       try{
-        var myPort = new SerialPort({
+        const myPort = new SerialPort({
           path: comport,
           baudRate: 115200
           //delimiter: '\n'
