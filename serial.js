@@ -14,10 +14,11 @@ const { ReadlineParser } = require('@serialport/parser-readline')
 /**
  * List of valid B0XX ports.
  */
-const validPorts = [
+const validDevices = [
   { vendorId: "2341", productId: "8036" },
   { vendorId: "2E8A", productId: "102F" },
-  { vendorId: "045E", productId: "02A1" }
+  { vendorId: "045E", productId: "02A1" },
+  { vendorId: "0738", productId: "4726" }
 ];
 
 /**
@@ -27,9 +28,9 @@ function findValidPort(ports) {
   for (const port of ports) {
     const vendorId = port.vendorId.toLowerCase();
     const productId = port.productId.toLowerCase();
-    for (const validPort of validPorts) {
+    for (const validDevice of validDevices) {
       // Case-insensitive check
-      if (validPort.vendorId.toLowerCase() === vendorId && validPort.productId.toLowerCase() === productId) {
+      if (validDevice.vendorId.toLowerCase() === vendorId && validDevice.productId.toLowerCase() === productId) {
         return port;
       }
     }
