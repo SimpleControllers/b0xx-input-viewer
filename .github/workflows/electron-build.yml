@@ -14,7 +14,7 @@ jobs:
           - name: ubuntu-latest
             artifact-path: "dist/B0XX Input Viewer-*.AppImage"
           - name: windows-latest
-            artifact-path: "dist/B0XX Input Viewer-*.exe"
+            artifact-path: "dist/B0XX Input Viewer *.exe"
 
     runs-on: ${{ matrix.os.name }}
 
@@ -50,5 +50,5 @@ jobs:
           name: B0XX Input Viewer ${{ env.VERSION_REF }}
           # path: ${{ matrix.os.artifact-path }}
           path: |
-            dist/B0XX Input Viewer-*
+            dist/B0XX\ Input\ Viewer-*
             !*.blockmap
