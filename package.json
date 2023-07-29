@@ -4,7 +4,9 @@
   "description": "B0XX Input Viewer using NodeJS and Electron.",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "repository": {
     "url": "https://b0xx.com/pages/resources"
@@ -19,9 +21,16 @@
   "author": "20XX Corp",
   "license": "GNU-LGPL-2.1",
   "devDependencies": {
+    "@electron-forge/cli": "^6.2.1",
+    "@electron-forge/maker-deb": "^6.2.1",
+    "@electron-forge/maker-rpm": "^6.2.1",
+    "@electron-forge/maker-squirrel": "^6.2.1",
+    "@electron-forge/maker-zip": "^6.2.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^6.2.1",
     "electron": "^17.0.0"
   },
   "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
     "serialport": "^10.3.0",
     "tableify": "^1.1.1"
   }
