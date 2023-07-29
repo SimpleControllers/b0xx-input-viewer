@@ -1,0 +1,48 @@
+name: Electron Build
+
+on: [push]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os:
+          - name: macos-latest
+          - name: ubuntu-latest
+          - name: windows-latest
+
+    runs-on: ${{ matrix.os.name }}
+
+    permissions:
+      contents: write
+
+    env:
+      VERSION_REF: ${{ github.ref_type == 'tag' && github.ref_name || github.sha }}
+
+    steps:
+      - name: Check out source code
+        uses: actions/checkout@v3
+
+      - name: Set up NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Build/release Electron app
+        uses: JonnyHaystack/action-electron-builder@v0.0.2
+        with:
+          # GitHub token, automatically provided to the action
+          # (No need to define this secret in the repo settings)
+          github_token: ${{ secrets.github_token }}
+
+          # If the commit is tagged with a version (e.g. "v1.0.0"),
+          # release the app after building
+          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
+      
+      - name: Publish artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: B0XX Input Viewer ${{ matrix.os.name }} ${{ env.VERSION_REF }}
+          path: |
+            dist/B0XX*
+            !dist/*.blockmap

@@ -1,5 +1,5 @@
 {
-  "name": "B0XX",
+  "name": "b0xx-input-viewer",
   "version": "1.0.0",
   "description": "B0XX Input Viewer using NodeJS and Electron.",
   "main": "main.js",
@@ -7,7 +7,7 @@
     "start": "electron ."
   },
   "repository": {
-    "url": "https://b0xx.com/pages/resources"
+    "url": "github:SimpleControllers/b0xx-input-viewer"
   },
   "keywords": [
     "B0XX",
@@ -17,12 +17,37 @@
     "Controller"
   ],
   "author": "20XX Corp",
-  "license": "GNU-LGPL-2.1",
+  "license": "LGPL-2.1-only",
   "devDependencies": {
-    "electron": "^17.0.0"
+    "electron": "^17.0.0",
+    "electron-builder": "^24.6.3"
   },
   "dependencies": {
     "serialport": "^10.3.0",
     "tableify": "^1.1.1"
+  },
+  "build": {
+    "appId": "com.b0xx.inputviewer",
+    "productName": "B0XX Input Viewer",
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Utility",
+      "icon": "icons/B0XX.icns"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "icons/icon_512@1x.png"
+    },
+    "mac": {
+      "target": [
+        "default"
+      ],
+      "category": "public.app-category.utilities",
+      "icon": "icons/B0XX.icns"
+    }
   }
 }
