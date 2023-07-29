@@ -35,11 +35,11 @@
         "AppImage"
       ],
       "category": "Utility",
-      "icon": "images/B0XX.ico"
+      "icon": "icons/B0XX.icns"
     },
     "win": {
       "target": ["nsis"],
-      "icon": "images/B0XX.ico"
+      "icon": "images/B0XX.icns"
     },
     "mac": {
       "target": ["default"],
