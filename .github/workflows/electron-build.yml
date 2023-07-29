@@ -43,7 +43,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: B0XX Input Viewer ${{ matrix.os.name }} ${{ env.VERSION_REF }}
-          # path: ${{ matrix.os.artifact-path }}
           path: |
             dist/B0XX*
             !dist/*.blockmap
