@@ -17,7 +17,7 @@
     "Controller"
   ],
   "author": "20XX Corp",
-  "license": "GNU-LGPL-2.1",
+  "license": "LGPL-2.1-only",
   "devDependencies": {
     "electron": "^17.0.0",
     "electron-builder": "^24.6.3"
@@ -34,7 +34,17 @@
       "target": [
         "AppImage"
       ],
-      "category": "Utility"
+      "category": "Utility",
+      "icon": "images/B0XX.ico"
+    },
+    "win": {
+      "target": ["nsis"],
+      "icon": "images/B0XX.ico"
+    },
+    "mac": {
+      "target": ["default"],
+      "category": "public.app-category.utilities",
+      "icon": "icons/B0XX.icns"
     }
   }
 }

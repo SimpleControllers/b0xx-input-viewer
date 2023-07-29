@@ -35,3 +35,9 @@ jobs:
           # If the commit is tagged with a version (e.g. "v1.0.0"),
           # release the app after building
           release: ${{ startsWith(github.ref, 'refs/tags/v') }}
+      
+      - name: Publish artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: B0XX Input Viewer ${{ env.VERSION_REF }}
+          path: "dist/B0XX Input Viewer-*"
