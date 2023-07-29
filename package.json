@@ -30,6 +30,7 @@
     "electron": "^17.0.0"
   },
   "dependencies": {
+    "electron-builder": "^24.6.3",
     "electron-squirrel-startup": "^1.0.0",
     "serialport": "^10.3.0",
     "tableify": "^1.1.1"

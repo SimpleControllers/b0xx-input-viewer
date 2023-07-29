@@ -1,5 +1,7 @@
 name: Electron Build
+
 on: [push]
+
 jobs:
   build:
     strategy:
