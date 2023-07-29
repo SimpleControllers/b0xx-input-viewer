@@ -7,7 +7,7 @@
     "start": "electron ."
   },
   "repository": {
-    "url": "github:SimpleControllers/b0xx-input-viewer"
+    "url": "github:JonnyHaystack/b0xx-input-viewer"
   },
   "keywords": [
     "B0XX",
@@ -23,6 +23,7 @@
     "electron-builder": "^24.6.3"
   },
   "dependencies": {
+    "electron-updater": "^6.1.1",
     "serialport": "^10.3.0",
     "tableify": "^1.1.1"
   },
