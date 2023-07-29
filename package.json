@@ -1,5 +1,5 @@
 {
-  "name": "B0XX",
+  "name": "b0xx-input-viewer",
   "version": "1.0.0",
   "description": "B0XX Input Viewer using NodeJS and Electron.",
   "main": "main.js",
@@ -7,7 +7,7 @@
     "start": "electron ."
   },
   "repository": {
-    "url": "https://b0xx.com/pages/resources"
+    "url": "github:SimpleControllers/b0xx-input-viewer"
   },
   "keywords": [
     "B0XX",
