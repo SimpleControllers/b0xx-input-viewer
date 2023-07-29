@@ -39,7 +39,7 @@
     },
     "win": {
       "target": ["nsis"],
-      "icon": "images/B0XX.icns"
+      "icon": "icons/icon_512@1x.png"
     },
     "mac": {
       "target": ["default"],
