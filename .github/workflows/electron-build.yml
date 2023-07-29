@@ -6,7 +6,15 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        os:
+          - name: macos-latest
+            artifact-path: "dist/B0XX Input Viewer-*.exe"
+          - name: ubuntu-latest
+            artifact-path: "dist/B0XX Input Viewer-*.AppImage"
+          - name: windows-latest
+            artifact-path: |
+              "dist/B0XX Input Viewer-*.dmg"
+              "dist/B0XX Input Viewer-*.zip"
 
     runs-on: ${{ matrix.os }}
 
@@ -40,8 +48,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: B0XX Input Viewer ${{ env.VERSION_REF }}
-          path: |
-            "dist/B0XX Input Viewer-*.AppImage"
-            "dist/B0XX Input Viewer-*.exe"
-            "dist/B0XX Input Viewer-*.dmg"
-            "dist/B0XX Input Viewer-*.zip"
+          path: ${{ matrix.os.artifact-path }}
