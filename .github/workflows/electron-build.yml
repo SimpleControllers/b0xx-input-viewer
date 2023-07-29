@@ -8,13 +8,8 @@ jobs:
       matrix:
         os:
           - name: macos-latest
-            artifact-path: |
-              "dist/B0XX Input Viewer-*.dmg"
-              "dist/B0XX Input Viewer-*.zip"
           - name: ubuntu-latest
-            artifact-path: "dist/B0XX Input Viewer-*.AppImage"
           - name: windows-latest
-            artifact-path: "dist/B0XX Input Viewer *.exe"
 
     runs-on: ${{ matrix.os.name }}
 
@@ -51,4 +46,4 @@ jobs:
           # path: ${{ matrix.os.artifact-path }}
           path: |
             dist/B0XX*
-            !*.blockmap
+            !dist/*.blockmap
