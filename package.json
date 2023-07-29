@@ -23,7 +23,6 @@
     "electron-builder": "^24.6.3"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0",
     "serialport": "^10.3.0",
     "tableify": "^1.1.1"
   },
@@ -38,11 +37,15 @@
       "icon": "icons/B0XX.icns"
     },
     "win": {
-      "target": ["nsis"],
+      "target": [
+        "nsis"
+      ],
       "icon": "icons/icon_512@1x.png"
     },
     "mac": {
-      "target": ["default"],
+      "target": [
+        "default"
+      ],
       "category": "public.app-category.utilities",
       "icon": "icons/B0XX.icns"
     }
