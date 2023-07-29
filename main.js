@@ -13,7 +13,9 @@ autoUpdater.logger.transports.file.level = 'info';
 
 function sendStatusToWindow(text) {
     log.info(text);
-    mainWindow.webContents.send("message", text);
+    if (mainWindow) {
+        mainWindow.webContents.send("message", text);
+    }
 }
 
 function createWindow() {
@@ -52,6 +54,26 @@ function createWindow() {
     });
 }
 
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+app.on("ready", createWindow);
+
+// Quit when all windows are closed.
+app.on("window-all-closed", function () {
+    // On OS X it is common for applications and their menu bar
+    // to stay active until the user quits explicitly with Cmd + Q
+    app.quit();
+});
+
+app.on("activate", function () {
+    // On OS X it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (mainWindow === null) {
+        createWindow();
+    }
+});
+
 // Check for updates on startup.
 app.on("ready", function () {
     autoUpdater.checkForUpdates();
@@ -85,26 +107,6 @@ autoUpdater.on("download-progress", (progressObj) => {
 autoUpdater.on("update-downloaded", (info) => {
     sendStatusToWindow("Update downloaded");
     autoUpdater.quitAndInstall();
-});
-
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on("ready", createWindow);
-
-// Quit when all windows are closed.
-app.on("window-all-closed", function () {
-    // On OS X it is common for applications and their menu bar
-    // to stay active until the user quits explicitly with Cmd + Q
-    app.quit();
-});
-
-app.on("activate", function () {
-    // On OS X it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (mainWindow === null) {
-        createWindow();
-    }
 });
 
 // In this file you can include the rest of your app's specific main process
