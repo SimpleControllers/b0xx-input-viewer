@@ -27,10 +27,10 @@
     "@electron-forge/maker-squirrel": "^6.2.1",
     "@electron-forge/maker-zip": "^6.2.1",
     "@electron-forge/plugin-auto-unpack-natives": "^6.2.1",
-    "electron": "^17.0.0"
+    "electron": "^17.0.0",
+    "electron-builder": "^24.6.3"
   },
   "dependencies": {
-    "electron-builder": "^24.6.3",
     "electron-squirrel-startup": "^1.0.0",
     "serialport": "^10.3.0",
     "tableify": "^1.1.1"
