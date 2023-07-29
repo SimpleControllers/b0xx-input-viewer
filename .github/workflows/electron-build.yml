@@ -36,6 +36,11 @@ jobs:
           # release the app after building
           release: ${{ startsWith(github.ref, 'refs/tags/v') }}
       
+      - name: Debug stuff
+        run: |
+          ls -lah
+          ls -lah dist/
+
       - name: Publish artifact
         uses: actions/upload-artifact@v3
         with:
