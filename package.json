@@ -1,6 +1,6 @@
 {
   "name": "b0xx-input-viewer",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "B0XX Input Viewer using NodeJS and Electron.",
   "main": "main.js",
   "scripts": {
