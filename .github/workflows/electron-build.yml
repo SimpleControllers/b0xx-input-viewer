@@ -41,7 +41,7 @@ jobs:
         with:
           name: B0XX Input Viewer ${{ env.VERSION_REF }}
           path: |
-            "B0XX Input Viewer-*.AppImage"
-            "B0XX Input Viewer-*.exe"
-            "B0XX Input Viewer-*.dmg"
-            "B0XX Input Viewer-*.zip"
+            "dist/B0XX Input Viewer-*.AppImage"
+            "dist/B0XX Input Viewer-*.exe"
+            "dist/B0XX Input Viewer-*.dmg"
+            "dist/B0XX Input Viewer-*.zip"
