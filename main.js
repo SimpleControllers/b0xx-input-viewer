@@ -9,7 +9,7 @@ const { autoUpdater } = require("electron-updater");
 let mainWindow;
 
 autoUpdater.logger = log;
-autoUpdater.logger.transports.file.level = 'info';
+autoUpdater.logger.transports.file.level = "info";
 
 function sendStatusToWindow(text) {
     log.info(text);
