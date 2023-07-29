@@ -16,7 +16,7 @@ jobs:
               "dist/B0XX Input Viewer-*.dmg"
               "dist/B0XX Input Viewer-*.zip"
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os.name }}
 
     permissions:
       contents: write
