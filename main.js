@@ -7,6 +7,11 @@ const { autoUpdater } = require("electron-updater");
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
+function sendStatusToWindow(text) {
+    log.info(text);
+    mainWindow.webContents.send('message', text);
+}
+
 function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
@@ -45,7 +50,7 @@ function createWindow() {
 
 // Check for updates on startup.
 app.on('ready', function()  {
-    autoUpdater.checkForUpdatesAndNotify();
+    autoUpdater.checkForUpdates();
 });
 
 /* Auto-updater notification handling */
