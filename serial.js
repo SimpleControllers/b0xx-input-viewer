@@ -11,6 +11,10 @@ const { ReadlineParser } = require('@serialport/parser-readline')
 //const Readline = SerialPort.parsers.Readline;
 //const { dialog } = require('electron')
 
+function log(...args) {
+  process.stdout.write(args.join(' ') + '\n');
+}
+
 /**
  * List of valid B0XX ports.
  */
@@ -26,8 +30,11 @@ const validDevices = [
  */
 function findValidPort(ports) {
   for (const port of ports) {
-    const vendorId = port.vendorId.toLowerCase();
-    const productId = port.productId.toLowerCase();
+    const vendorId = port?.vendorId?.toLowerCase();
+    const productId = port?.productId?.toLowerCase();
+    if (vendorId == null || productId == null) {
+      continue;
+    }
     for (const validDevice of validDevices) {
       // Case-insensitive check
       if (validDevice.vendorId.toLowerCase() === vendorId && validDevice.productId.toLowerCase() === productId) {
@@ -37,55 +44,50 @@ function findValidPort(ports) {
   }
 }
 
-function serialCon(){
-  SerialPort.list().then(ports => {
-    const port = findValidPort(ports);
+async function serialCon() {
+  const ports = await SerialPort.list();
+  const port = findValidPort(ports);
 
-    if (!port) {
-      console.log("B0XX Not Found")
-      //console.log(dialog.showMessageBox(mainWindow, {message: "B0XX Not Found"}))
-      //const response = dialog.showMessageBox(null);
-      //console.log(response);
-      document.getElementById('recon').style.visibility='visible';
+  if (!port) {
+    log("B0XX Not Found")
+    //log(dialog.showMessageBox(mainWindow, {message: "B0XX Not Found"}))
+    //const response = dialog.showMessageBox(null);
+    //log(response);
+    document.getElementById('recon').style.visibility = 'visible';
+  } else {
+    log("B0XX Found");
+    log(JSON.stringify(port));
+    log(port.vendorId);
+    const comport = port.path;
+    log(comport);
+
+    try{
+      const myPort = new SerialPort({
+        path: comport,
+        baudRate: 115200
+        //delimiter: '\n'
+        //parser: SerialPort.parsers.readline('\n')
+      });
+
+      const parser = myPort.pipe(new ReadlineParser({delimiter: '\n'}))
+      parser.on('data', onData);
+      myPort.on('close', onClose);
+      document.getElementById('recon').style.visibility='hidden';
+    } catch (err){
+      log("issue opening comport");
     }
-    else {
-      console.log("B0XX Found")
-      console.log(port)
-      console.log(port.vendorId)
-      const comport = port.path;
-      console.log(comport)
-
-      try{
-        const myPort = new SerialPort({
-          path: comport,
-          baudRate: 115200
-          //delimiter: '\n'
-          //parser: SerialPort.parsers.readline('\n')
-        });
-
-        const parser = myPort.pipe(new ReadlineParser({delimiter: '\n'}))
-        parser.on('data', onData);
-        myPort.on('close', onClose);
-        document.getElementById('recon').style.visibility='hidden';
-      }
-
-      catch (err){
-        console.log("issue opening comport");
-      }
-
-    }
-  })
+  }
 }
 
 document.getElementById("recon").addEventListener("click", reconButton);
-serialCon();
+serialCon()
 
 function reconButton(){
   serialCon();
 }
 
 function onData(data){
-  //console.log(data);
+  //log(data);
   //if(data.charAt(0) === '1')document.getElementById('abtn').style.visibility='visible';
   //else document.getElementById('abtn').style.visibility='hidden';
   showhide('stbtn', data.charAt(0));
@@ -112,11 +114,13 @@ function onData(data){
 }
 
 function showhide(imgname, vis){
-  if(vis === '1')document.getElementById(imgname).style.visibility='visible';
-  else document.getElementById(imgname).style.visibility='hidden';
+  if (vis === '1') {
+    document.getElementById(imgname).style.visibility = 'visible';
+  } else {
+    document.getElementById(imgname).style.visibility = 'hidden';
+  }
 }
 
 function onClose(){
-  //console.log('Closed')
-  document.getElementById('recon').style.visibility='visible';
+  document.getElementById('recon').style.visibility = 'visible';
 }
